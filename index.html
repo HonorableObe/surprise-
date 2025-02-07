@@ -32,10 +32,8 @@
     }
 
     .button-container {
-      display: flex;
-      justify-content: center;
+      display: inline-flex;
       gap: 20px;
-      position: relative;
       margin-top: 20px;
     }
 
@@ -47,14 +45,11 @@
       border-radius: 5px;
       color: white;
       cursor: pointer;
+      position: relative;
     }
 
     button:hover {
       background-color: #ff3377;
-    }
-
-    #no-btn {
-      position: absolute;
     }
   </style>
 </head>
@@ -75,14 +70,13 @@
     const noButton = document.getElementById('no-btn');
     const yesButton = document.getElementById('yes-btn');
 
-    // Ensure buttons stay side by side initially
-    const container = document.querySelector('.button-container');
-    const containerRect = container.getBoundingClientRect();
-
-    // Move "No" button randomly when clicked
+    // Move the "No" button randomly when clicked
     noButton.addEventListener('click', () => {
-      const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
-      const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      const containerWidth = window.innerWidth - noButton.offsetWidth;
+      const containerHeight = window.innerHeight - noButton.offsetHeight;
+
+      const randomX = Math.random() * containerWidth;
+      const randomY = Math.random() * containerHeight;
 
       noButton.style.left = `${randomX}px`;
       noButton.style.top = `${randomY}px`;
