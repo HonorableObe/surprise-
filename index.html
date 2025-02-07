@@ -35,7 +35,8 @@
       display: flex;
       justify-content: center;
       gap: 20px;
-      position: relative; /* Needed for absolute positioning of the "No" button */
+      position: relative;
+      margin-top: 20px;
     }
 
     button {
@@ -46,7 +47,6 @@
       border-radius: 5px;
       color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
     }
 
     button:hover {
@@ -74,30 +74,23 @@
   <script>
     const noButton = document.getElementById('no-btn');
     const yesButton = document.getElementById('yes-btn');
+
+    // Ensure buttons stay side by side initially
     const container = document.querySelector('.button-container');
+    const containerRect = container.getBoundingClientRect();
 
-    noButton.addEventListener('mouseenter', () => {
-      const containerWidth = container.offsetWidth;
-      const containerHeight = container.offsetHeight;
-      const noButtonWidth = noButton.offsetWidth;
-      const noButtonHeight = noButton.offsetHeight;
-
-      const maxX = containerWidth - noButtonWidth;
-      const maxY = containerHeight - noButtonHeight;
-
-      let randomX, randomY;
-        do {
-            randomX = Math.random() * maxX;
-            randomY = Math.random() * maxY;
-        } while (Math.abs(randomX - yesButton.offsetLeft) < yesButton.offsetWidth * 1.5 && Math.abs(randomY - yesButton.offsetTop) < yesButton.offsetHeight * 1.5); // Check overlap
-
+    // Move "No" button randomly when clicked
+    noButton.addEventListener('click', () => {
+      const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
 
       noButton.style.left = `${randomX}px`;
       noButton.style.top = `${randomY}px`;
     });
 
+    // Show alert when Yes is clicked
     yesButton.addEventListener('click', () => {
-      alert("Yo yo yo, I'm kidding!  But seriously, I'd love to spend Valentine's Day with you!");
+      alert("Yo yo yo, I'm kidding!");
     });
   </script>
 </body>
